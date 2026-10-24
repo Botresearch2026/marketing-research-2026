@@ -3,63 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Куда уходят маркетинговые бюджеты?</title>
+<title>Маркетинговое исследование</title>
 
-<!-- Подключение шрифта из макета -->
+<!-- Шрифт из макета Figma -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-/* 1. Общие цвета и базовые правила */
+/* 1. Базовые настройки и цвета */
 :root {
-  --yellow: #f6e34b;
-  --black: #080808;
-  --grey: #777;
-  --white: #fff;
+  --ink: #080808;
+  --paper: #ffffff;
+  --accent: #f6e34b;
+  --font: "Roboto Condensed", sans-serif;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   min-height: 100%;
-  background: var(--white);
+  background: var(--paper);
 }
 
 body {
-  color: var(--black);
-  font-family: "Roboto Condensed", sans-serif;
+  color: var(--ink);
+  font-family: var(--font);
   font-weight: 400;
 }
 
-button, textarea {
+button,
+textarea {
   font: inherit;
   color: inherit;
 }
 
-/* 2. Основной экран: занимает ширину окна, не сжимается в карточку */
+/* 2. Основной контейнер страницы */
 .app {
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
-  margin: auto;
-  padding: clamp(28px, 5.3vw, 64px) clamp(24px, 5.4vw, 64px) 0;
+  padding: 4.8vw 5.1vw 0;
   display: flex;
   flex-direction: column;
-  background: var(--white);
-  overflow-wrap: anywhere;
+  background: var(--paper);
+  overflow-wrap: break-word;
 }
 
-/* 3. Шапка с логотипами. SVG должны лежать рядом с index.html */
+/* 3. Логотипы в верхней части страницы */
 .header {
   width: 100%;
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  gap: 24px;
+  align-items: flex-start;
+  gap: 20px;
   flex: 0 0 auto;
 }
 
@@ -70,32 +71,34 @@ button, textarea {
 }
 
 .logo-img.brif {
-  width: clamp(132px, 26.7vw, 250px);
+  width: 22.8%;
+  max-width: 250px;
 }
 
 .logo-img.bd {
-  width: clamp(112px, 24vw, 225px);
+  width: 20.5%;
+  max-width: 225px;
 }
 
-/* 4. Область вопроса и вертикальный отступ от логотипов */
+/* 4. Блок вопроса и отступ от логотипов */
 #content {
   width: 100%;
-  margin-top: clamp(120px, 11.8vh, 230px);
+  margin-top: 10.5vw;
 }
 
 .question {
-  margin: 0 0 clamp(42px, 5.2vw, 88px);
   max-width: 100%;
-  font-size: clamp(32px, 5.1vw, 55px);
+  margin: 0 0 5.3vw;
+  font-size: clamp(28px, 5.1vw, 55px);
   font-weight: 400;
-  line-height: 1.16;
+  line-height: 1.43;
   letter-spacing: 0;
 }
 
 .hint {
-  margin: calc(clamp(42px, 5.2vw, 88px) * -0.72) 0 28px;
-  color: var(--grey);
-  font-size: clamp(16px, 1.9vw, 22px);
+  margin: -3.7vw 0 2.6vw;
+  color: #666;
+  font-size: clamp(15px, 2vw, 22px);
   line-height: 1.35;
 }
 
@@ -103,39 +106,41 @@ button, textarea {
   display: none;
 }
 
-/* 5. Ответы: вертикальный список, ширина капсулы зависит от текста */
+/* 5. Список вариантов ответа */
 .answers {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: clamp(10px, 1.3vw, 14px);
+  gap: 10px;
   width: 100%;
 }
 
+/* Капсула ответа: ширина по тексту, без лишней минимальной высоты */
 .answer {
   appearance: none;
   display: block;
   width: fit-content;
   max-width: 100%;
-  min-height: clamp(60px, 10.6vw, 114px);
-  padding: clamp(14px, 2.5vw, 28px) clamp(22px, 5.8vw, 62px);
-  border: 2px solid var(--black);
-  border-radius: 999px;
-  background: var(--white);
-  font-size: clamp(20px, 3.25vw, 35px);
+  min-height: 0;
+  padding: 0.9em 1.7em;
+  border: 2px solid var(--ink);
+  border-radius: 134px;
+  background: var(--paper);
+  font-size: clamp(19px, 3.24vw, 35px);
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.43;
   text-align: left;
   cursor: pointer;
   transition: background-color 120ms ease, border-color 120ms ease;
 }
 
-/* Выбранный ответ выделяется жёлтым */
+/* Выбранный вариант ответа */
 .answer.selected {
-  background: var(--yellow);
-  border-color: var(--yellow);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
+/* Видимая обводка при управлении с клавиатуры */
 .answer:focus-visible,
 .nav button:focus-visible {
   outline: 2px solid #2457ff;
@@ -146,49 +151,59 @@ button, textarea {
 .text-answer {
   display: block;
   width: min(100%, 720px);
-  min-height: 150px;
-  padding: 18px 20px;
-  border: 2px solid var(--black);
+  min-height: 130px;
+  padding: 16px 18px;
+  border: 2px solid var(--ink);
   border-radius: 24px;
-  background: var(--white);
-  font-size: clamp(20px, 2.4vw, 28px);
+  background: var(--paper);
+  font-size: clamp(18px, 2.4vw, 26px);
   line-height: 1.4;
   resize: vertical;
 }
 
 .text-answer:focus {
-  outline: 2px solid var(--black);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
-/* 7. Нижняя навигация: назад, номер шага, далее */
+/* 7. Нижняя панель навигации */
 .footer {
   width: 100%;
   margin-top: auto;
-  padding-top: clamp(100px, 13vh, 250px);
-  padding-bottom: clamp(100px, 22vh, 430px);
+  padding-top: 8vw;
+  padding-bottom: 8.5vw;
 }
 
 .nav {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
 }
 
 .nav button {
   display: inline-flex;
   align-items: center;
-  gap: clamp(8px, 1.4vw, 18px);
+  gap: 0.45em;
   width: fit-content;
+  max-width: 100%;
   padding: 0;
   border: 0;
   background: transparent;
-  font-size: clamp(24px, 4.2vw, 44px);
+  font-size: clamp(22px, 4.05vw, 44px);
   font-weight: 400;
   line-height: 1.1;
   cursor: pointer;
+  white-space: nowrap;
+}
+
+#back {
+  justify-self: start;
+}
+
+#next {
+  justify-self: end;
 }
 
 .nav-label {
@@ -196,51 +211,43 @@ button, textarea {
   text-underline-offset: 4px;
 }
 
-#next {
-  justify-self: end;
-}
-
-#back {
-  justify-self: start;
-}
-
 .nav button:disabled {
-  opacity: .25;
+  opacity: 0.25;
   cursor: default;
 }
 
+/* Номер текущего шага */
 .progress {
   justify-self: center;
-  color: var(--yellow);
-  font-size: clamp(20px, 2.8vw, 30px);
+  color: var(--accent);
+  font-size: clamp(18px, 2.75vw, 30px);
   line-height: 1.2;
   white-space: nowrap;
 }
 
-/* 8. Демонстрационный блок статистики; реальные данные пока не подключены */
+/* 8. Экран демонстрационной статистики */
 .stat-title {
-  margin: 28px 0 8px;
-  color: var(--grey);
-  font-size: clamp(16px, 1.8vw, 20px);
+  margin: 24px 0 8px;
+  color: #666;
+  font-size: clamp(15px, 1.8vw, 20px);
 }
 
 .stat-number {
   margin: 0 0 6px;
-  font-size: clamp(42px, 5vw, 58px);
-  letter-spacing: -1px;
+  font-size: clamp(40px, 5vw, 58px);
 }
 
 .stat-caption {
-  color: var(--grey);
-  font-size: clamp(16px, 1.8vw, 20px);
+  color: #666;
+  font-size: clamp(15px, 1.8vw, 20px);
   line-height: 1.45;
 }
 
 .bar-list {
   display: grid;
-  gap: 18px;
+  gap: 16px;
   width: min(100%, 720px);
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .bar-label {
@@ -248,7 +255,7 @@ button, textarea {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 7px;
-  font-size: clamp(15px, 1.7vw, 19px);
+  font-size: clamp(14px, 1.7vw, 19px);
 }
 
 .bar-track {
@@ -260,80 +267,88 @@ button, textarea {
 
 .bar-fill {
   height: 100%;
-  background: var(--yellow);
+  background: var(--accent);
 }
 
 /* 9. Адаптация для телефонов */
 @media (max-width: 600px) {
+  /* Боковые поля страницы */
   .app {
-    padding: 24px 24px 0;
+    padding: 6.2vw 5.5vw 0;
   }
 
+  /* Размеры логотипов */
   .header {
-    gap: 16px;
+    gap: 12px;
   }
 
   .logo-img.brif {
-    width: clamp(124px, 38vw, 170px);
+    width: 40%;
+    max-width: 150px;
   }
 
   .logo-img.bd {
-    width: clamp(100px, 31vw, 145px);
+    width: 34%;
+    max-width: 128px;
   }
 
+  /* Расстояние от логотипов до вопроса */
   #content {
-    margin-top: clamp(100px, 13vh, 170px);
+    margin-top: 18vw;
   }
 
+  /* Заголовок на телефоне */
   .question {
-    margin-bottom: 42px;
-    font-size: clamp(32px, 7.2vw, 42px);
-    line-height: 1.18;
+    margin-bottom: 8.5vw;
+    font-size: clamp(27px, 6.1vw, 36px);
+    line-height: 1.3;
   }
 
   .hint {
-    margin-top: -25px;
-    margin-bottom: 22px;
-    font-size: 16px;
+    margin: -5.5vw 0 4vw;
+    font-size: 15px;
   }
 
+  /* Размеры списка и капсул ответов */
   .answers {
-    gap: 10px;
-  }
-
-  .answer {
-    min-height: 0;
-    padding: 15px 24px;
-    font-size: clamp(20px, 5.2vw, 25px);
-    line-height: 1.25;
-  }
-
-  .footer {
-    padding-top: 100px;
-    padding-bottom: max(40px, 9vh);
-  }
-
-  .nav {
     gap: 8px;
   }
 
+  .answer {
+    padding: 0.62em 1.05em;
+    border-width: 1.5px;
+    border-radius: 999px;
+    font-size: clamp(18px, 4.4vw, 25px);
+    line-height: 1.3;
+  }
+
+  /* Нижняя навигация на телефоне */
+  .footer {
+    padding-top: 16vw;
+    padding-bottom: 8vw;
+  }
+
+  .nav {
+    gap: 6px;
+  }
+
   .nav button {
-    gap: 7px;
-    font-size: clamp(22px, 5.7vw, 29px);
+    gap: 6px;
+    font-size: clamp(19px, 5vw, 27px);
   }
 
   .progress {
-    font-size: 22px;
+    font-size: clamp(17px, 4vw, 22px);
   }
 
   .text-answer {
-    min-height: 130px;
-    padding: 14px;
-    font-size: 20px;
+    min-height: 110px;
+    padding: 12px;
+    font-size: 18px;
   }
 }
 
-/* 10. Защита навигации от переполнения на очень узких экранах */
+/* 10. Дополнительная адаптация для очень узких экранов */
 @media (max-width: 360px) {
   .app {
     padding-right: 16px;
@@ -341,42 +356,42 @@ button, textarea {
   }
 
   .nav button {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .progress {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
-/* 11. Сокращение пустых промежутков на телефонах с коротким экраном */
+/* 11. Коррекция отступов на невысоких экранах */
 @media (max-height: 760px) {
   #content {
-    margin-top: clamp(60px, 8vh, 110px);
+    margin-top: 7vw;
   }
 
   .footer {
-    padding-top: 70px;
-    padding-bottom: 40px;
+    padding-top: 6vw;
+    padding-bottom: 5vw;
   }
 }
 </style>
 </head>
 
 <body>
-<!-- Главный контейнер опроса -->
+<!-- 12. Главный контейнер опроса -->
 <main class="app">
 
-  <!-- Шапка с логотипами из файлов репозитория -->
+  <!-- Верхняя строка с логотипами из репозитория -->
   <header class="header">
     <img src="logo_brif.svg" alt="Чайный бриф" class="logo-img brif">
-    <img src="logo_BD.svg" alt="B&D — исследование маркетинга" class="logo-img bd">
+    <img src="logo_BD.svg" alt="B&D — информационный партнёр" class="logo-img bd">
   </header>
 
-  <!-- JavaScript подставляет сюда вопрос или экран статистики -->
+  <!-- Здесь скрипт отображает вопрос или статистику -->
   <section id="content" aria-live="polite"></section>
 
-  <!-- Нижняя навигация -->
+  <!-- Нижняя панель навигации -->
   <footer class="footer">
     <nav class="nav" aria-label="Навигация по опросу">
       <button id="back" type="button">
@@ -395,9 +410,10 @@ button, textarea {
 </main>
 
 <script>
-/* 12. Содержание опроса.
-   Здесь можно менять вопросы и варианты.
-   multi: true разрешает до трёх ответов; text: true создаёт текстовое поле. */
+/* 13. Список вопросов.
+   Здесь можно редактировать формулировки и варианты ответов.
+   multi: true — разрешено выбрать до трёх вариантов.
+   text: true — отображается поле для свободного ответа. */
 const questions = [
   {
     title: "Ваша должность?",
@@ -462,8 +478,9 @@ const questions = [
   }
 ];
 
-/* 13. Состояние опроса.
-   Ответы хранятся в памяти страницы и не отправляются на сервер. */
+/* 14. Переменные состояния опроса.
+   Ответы пока хранятся только в открытой странице,
+   в базу данных они не отправляются. */
 const answers = {};
 let index = 0;
 let showingStats = false;
@@ -473,7 +490,7 @@ const back = document.getElementById("back");
 const next = document.getElementById("next");
 const progress = document.getElementById("progress");
 
-/* 14. Рисуем вопрос и восстанавливаем предыдущий ответ, если он есть */
+/* 15. Отображение вопроса и вариантов ответа */
 function renderQuestion() {
   showingStats = false;
   const q = questions[index];
@@ -504,7 +521,7 @@ function renderQuestion() {
 
   content.innerHTML = html;
 
-  /* Восстанавливаем текстовый ответ после возвращения к вопросу */
+  /* Восстанавливаем свободный ответ после возврата к вопросу */
   if (q.text) {
     const field = document.getElementById("freeText");
     field.value = answers[index] || "";
@@ -513,21 +530,21 @@ function renderQuestion() {
       answers[index] = event.target.value;
     });
   } else {
-    /* Обрабатываем нажатия на варианты ответа */
+    /* Обрабатываем выбор варианта ответа */
     content.querySelectorAll(".answer").forEach(button => {
       button.addEventListener("click", () => {
         const option = q.options[Number(button.dataset.option)];
         let selected = answers[index] || [];
 
         if (q.multi) {
-          /* Для множественного выбора разрешено выбрать максимум три ответа */
-          selected = selected.includes(option)
-            ? selected.filter(item => item !== option)
-            : selected.length < 3
-              ? [...selected, option]
-              : selected;
+          /* Для множественного выбора ограничение — три варианта */
+          if (selected.includes(option)) {
+            selected = selected.filter(item => item !== option);
+          } else if (selected.length < 3) {
+            selected = [...selected, option];
+          }
         } else {
-          /* При одиночном выборе новый ответ заменяет предыдущий */
+          /* Для одиночного выбора сохраняется один вариант */
           selected = [option];
         }
 
@@ -540,8 +557,8 @@ function renderQuestion() {
   updateNav();
 }
 
-/* 15. Демо-статистика.
-   Это заглушка, а не настоящие результаты исследования. */
+/* 16. Экран демонстрационной статистики.
+   Данные условные: реальные результаты ещё не подключены. */
 function renderStats() {
   showingStats = true;
 
@@ -553,10 +570,10 @@ function renderStats() {
 
   let html = `
     <h1 class="question">А что ответили другие?</h1>
-    <p class="hint">Демонстрационный пример статистики. Реальные данные появятся после подключения базы ответов.</p>
+    <p class="hint">Это демонстрационный экран. Реальные результаты появятся после подключения базы ответов.</p>
     <p class="stat-title">Уже ответили</p>
     <p class="stat-number">—</p>
-    <p class="stat-caption">Пока статистика не подключена к ответам участников.</p>`;
+    <p class="stat-caption">Статистика пока не подключена к ответам участников.</p>`;
 
   if (selectedText) {
     html += `<p class="stat-title">Ваш ответ</p><p>${escapeHtml(selectedText)}</p>`;
@@ -564,26 +581,29 @@ function renderStats() {
 
   html += `<div class="bar-list">`;
 
-  q.options?.slice(0, 5).forEach(option => {
-    html += `
-      <div>
-        <div class="bar-label">
-          <span>${escapeHtml(option)}</span>
-          <span>—</span>
-        </div>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:0%"></div>
-        </div>
-      </div>`;
-  });
+  if (q.options) {
+    q.options.slice(0, 5).forEach(option => {
+      html += `
+        <div>
+          <div class="bar-label">
+            <span>${escapeHtml(option)}</span>
+            <span>—</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:0%"></div>
+          </div>
+        </div>`;
+    });
+  }
 
   html += `</div>`;
   content.innerHTML = html;
+
   updateNav();
 }
 
-/* 16. Защита текста.
-   Не позволяет ответам пользователя интерпретироваться как HTML-разметка. */
+/* 17. Экранирование текста, чтобы пользовательский ввод
+   не интерпретировался браузером как HTML-разметка. */
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, character => ({
     "&": "&amp;",
@@ -594,7 +614,7 @@ function escapeHtml(value) {
   }[character]));
 }
 
-/* 17. Обновляем навигацию и номер вопроса */
+/* 18. Обновление номера шага и состояния кнопок */
 function updateNav() {
   back.disabled = index === 0 && !showingStats;
   next.disabled = false;
@@ -606,7 +626,7 @@ function updateNav() {
   progress.textContent = `${index + 1}/${questions.length}`;
 }
 
-/* 18. Кнопка «назад» */
+/* 19. Обработка кнопки «назад» */
 back.addEventListener("click", () => {
   if (showingStats) {
     renderQuestion();
@@ -616,9 +636,9 @@ back.addEventListener("click", () => {
   }
 });
 
-/* 19. Кнопка «далее».
-   Проверяет наличие ответа, показывает демо-статистику,
-   переключает вопросы и выводит финальный экран. */
+/* 20. Обработка кнопки «далее».
+   Проверяем заполнение ответа, показываем статистику,
+   переходим к следующему вопросу или завершаем опрос. */
 next.addEventListener("click", () => {
   if (!showingStats) {
     const answer = answers[index];
@@ -639,10 +659,10 @@ next.addEventListener("click", () => {
     index++;
     renderQuestion();
   } else {
-    /* Финальный экран. Подключение базы и PDF пока не реализовано */
+    /* Финальный экран. Отправка ответов пока не реализована */
     content.innerHTML = `
       <h1 class="question">Спасибо за участие!</h1>
-      <p class="stat-caption">Следующим этапом подключим финальные вопросы, согласия и получение полного PDF-отчёта.</p>`;
+      <p class="stat-caption">Следующий этап — подключение финальных вопросов, согласий и выдачи PDF-отчёта.</p>`;
 
     back.disabled = true;
     next.disabled = true;
@@ -650,7 +670,7 @@ next.addEventListener("click", () => {
   }
 });
 
-/* 20. При загрузке страницы показываем первый вопрос */
+/* 21. Запускаем опрос с первого вопроса */
 renderQuestion();
 </script>
 </body>
